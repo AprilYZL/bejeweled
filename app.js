@@ -2,14 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const grid = document.querySelector('.grid')
     const width = 8
     const squares = []
-    // const candyColors = [
-    //     'yellow',
-    //     'orange',
-    //     'purple',
-    //     'green',
-    //     'red',
-    //     'blue'
-    // ]
     const candyColors = [
         'url(images/1.jpeg)',
         'url(images/2.jpeg)',
@@ -18,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'url(images/5.jpeg)',
         'url(images/6.jpeg)'
     ]
+
     function createBoard() {
         for (let i = 0; i < width * width; i++) {
             const square = document.createElement('div')
@@ -104,9 +97,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
     }
+
+    checkRow3()
+
     function checkRow4() {
         for (let i = 0; i < 60; i++) {
-            let row4 = [i, i + 1, i + 2,i+3]
+            let row4 = [i, i + 1, i + 2, i + 3]
             let colorInterest = squares[i].style.backgroundImage
             const blankSquare = squares[i].style.backgroundImage === ''
             const notValidMoves = [5, 6, 7, 13, 14, 15, 21, 22, 23, 29, 30, 31, 37, 38, 39, 45, 46, 47, 53, 54, 55]
@@ -121,9 +117,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
+    checkRow4()
+
     function checkCol3() {
         for (let i = 0; i < 47; i++) {
-            let col3 = [i, i + width, i + width*2]
+            let col3 = [i, i + width, i + width * 2]
             let colorInterest = squares[i].style.backgroundImage
             const blankSquare = squares[i].style.backgroundImage === ''
             if (col3.every(index => squares[index].style.backgroundImage === colorInterest && !blankSquare)) {
@@ -134,9 +132,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    checkCol3()
+
     function checkCol4() {
-        for (let i = 0; i <39; i++) {
-            let col4 = [i, i + width, i + width*2,i+width*3]
+        for (let i = 0; i < 39; i++) {
+            let col4 = [i, i + width, i + width * 2, i + width * 3]
             let colorInterest = squares[i].style.backgroundImage
             const blankSquare = squares[i].style.backgroundImage === ''
             if (col4.every(index => squares[index].style.backgroundImage === colorInterest && !blankSquare)) {
@@ -147,15 +147,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    checkCol4()
+
     function candyRefreshed() {
-        for (let i =0; i<55;i++){
-            if(squares[i+width].style.backgroundImage === ''){
-                squares[i+width].style.backgroundImage = squares[i].style.backgroundImage
+        for (let i = 0; i < 55; i++) {
+            if (squares[i + width].style.backgroundImage === '') {
+                squares[i + width].style.backgroundImage = squares[i].style.backgroundImage
                 squares[i].style.backgroundImage = ''
-                const topRow = [0,1,2,3,4,5,6,7]
+                const topRow = [0, 1, 2, 3, 4, 5, 6, 7]
                 const isTop = topRow.includes(i)
-                if (isTop && squares[i].style.backgroundImage===''){
-                    let randomCandy = Math.floor(Math.random()*candyColors.length)
+                if (isTop && squares[i].style.backgroundImage === '') {
+                    let randomCandy = Math.floor(Math.random() * candyColors.length)
                     squares[i].style.backgroundImage = candyColors[randomCandy]
                 }
             }
